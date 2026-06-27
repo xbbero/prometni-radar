@@ -103,11 +103,8 @@ def sync_route(con, name, points):
 
 
 def build_body(points, cfg, departure_utc):
-    def wp(p, via=False):
-        w = {"location": {"latLng": {"latitude": p["lat"], "longitude": p["lng"]}}}
-        if via:
-            w["via"] = True
-        return w
+    def wp(p):
+        return {"location": {"latLng": {"latitude": p["lat"], "longitude": p["lng"]}}}
 
     body = {
         "origin": wp(points[0]),
@@ -119,13 +116,13 @@ def build_body(points, cfg, departure_utc):
     # trafficModel je dozvoljen samo uz TRAFFIC_AWARE_OPTIMAL
     if cfg["routing_preference"] == "TRAFFIC_AWARE_OPTIMAL":
         body["trafficModel"] = cfg["traffic_model"]
-    intermediates = points[1:-1]
-    if intermediates:
-        # via=True (pass-through): izbjegava obilaske na autocesti razdvojenih
-        # kolnika. Posljedica: ruta vraća JEDNU dionicu (cijela ruta). Razdioba po
-        # segmentu je v2 -> tada makni via ili koristi per-kolnik koordinate.
-        via = bool(cfg.get("pass_through_waypoints", False))
-        body["intermediates"] = [wp(p, via=via) for p in intermediates]
+    # whole_route_only (default): NE šalji međutočke -> Google sam nađe najbržu
+    # rutu (A1), bez rizika da neka točka skrene rutu na krivi kolnik. Vraća
+    # jednu dionicu = cijela ruta. (false = v2: međutočke kao stajališta -> dionice)
+    if not cfg.get("whole_route_only", True):
+        intermediates = points[1:-1]
+        if intermediates:
+            body["intermediates"] = [wp(p) for p in intermediates]
     return body
 
 
