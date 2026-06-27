@@ -13,6 +13,10 @@ traffic_model: BEST_GUESS
 # TRAFFIC_AWARE (Pro tier, besplatno do 5000/mj) | TRAFFIC_AWARE_OPTIMAL (skuplje)
 routing_preference: TRAFFIC_AWARE
 
+# true = međutočke kao 'via' (pass-through): pouzdana ukupna ruta bez obilazaka,
+#        ali samo cijela ruta (bez razdiobe po dionicama). Za v2 stavi na false.
+pass_through_waypoints: true
+
 routes:
   - name: "Šibenik → Zagreb"
     active: true

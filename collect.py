@@ -103,8 +103,11 @@ def sync_route(con, name, points):
 
 
 def build_body(points, cfg, departure_utc):
-    def wp(p):
-        return {"location": {"latLng": {"latitude": p["lat"], "longitude": p["lng"]}}}
+    def wp(p, via=False):
+        w = {"location": {"latLng": {"latitude": p["lat"], "longitude": p["lng"]}}}
+        if via:
+            w["via"] = True
+        return w
 
     body = {
         "origin": wp(points[0]),
@@ -118,7 +121,11 @@ def build_body(points, cfg, departure_utc):
         body["trafficModel"] = cfg["traffic_model"]
     intermediates = points[1:-1]
     if intermediates:
-        body["intermediates"] = [wp(p) for p in intermediates]
+        # via=True (pass-through): izbjegava obilaske na autocesti razdvojenih
+        # kolnika. Posljedica: ruta vraća JEDNU dionicu (cijela ruta). Razdioba po
+        # segmentu je v2 -> tada makni via ili koristi per-kolnik koordinate.
+        via = bool(cfg.get("pass_through_waypoints", False))
+        body["intermediates"] = [wp(p, via=via) for p in intermediates]
     return body
 
 
@@ -154,11 +161,17 @@ def parse_response(payload, points):
 
     legs_in = r.get("legs") or []
     legs = []
+    # Kad su međutočke 'via', API vraća jednu dionicu za cijelu rutu.
+    one_leg_whole = (len(legs_in) == 1 and len(points) > 2)
     for i, leg in enumerate(legs_in):
         d = parse_seconds(leg.get("duration"))
         s = parse_seconds(leg.get("staticDuration"))
-        from_label = points[i]["label"] if i < len(points) else f"p{i}"
-        to_label = points[i + 1]["label"] if i + 1 < len(points) else f"p{i+1}"
+        if one_leg_whole:
+            from_label = points[0]["label"]
+            to_label = points[-1]["label"]
+        else:
+            from_label = points[i]["label"] if i < len(points) else f"p{i}"
+            to_label = points[i + 1]["label"] if i + 1 < len(points) else f"p{i+1}"
         legs.append({
             "seq": i,
             "from_label": from_label,
