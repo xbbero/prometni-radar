@@ -112,8 +112,10 @@ def build_body(points, cfg, departure_utc):
         "travelMode": "DRIVE",
         "routingPreference": cfg["routing_preference"],
         "departureTime": departure_utc,
-        "trafficModel": cfg["traffic_model"],
     }
+    # trafficModel je dozvoljen samo uz TRAFFIC_AWARE_OPTIMAL
+    if cfg["routing_preference"] == "TRAFFIC_AWARE_OPTIMAL":
+        body["trafficModel"] = cfg["traffic_model"]
     intermediates = points[1:-1]
     if intermediates:
         body["intermediates"] = [wp(p) for p in intermediates]
