@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-promet}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-promet}
+      POSTGRES_DB: ${POSTGRES_DB:-promet}
+      TZ: Europe/Zagreb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"        # za vanjski pristup (psql/DBeaver); ukloni ako ne treba
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-promet} -d ${POSTGRES_DB:-promet}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  collector:
+    build: .
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-promet}:${POSTGRES_PASSWORD:-promet}@db:5432/${POSTGRES_DB:-promet}
+      GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY}
+      TZ: Europe/Zagreb
+    volumes:
+      - ./reports:/app/reports          # grafovi se spremaju ovdje -> vidiš ih na hostu
+      - ./config.yaml:/app/config.yaml  # uređuj rute bez ponovnog buildanja
+      - ./crontab:/app/crontab          # mijenjaj raspored pa: docker compose restart collector
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgdata:

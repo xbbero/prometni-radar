@@ -1,0 +1,47 @@
+# Definicije ruta i parametara prikupljanja.
+#
+# Svaka ruta je UREĐENI niz točaka: origin, međutočke..., destination.
+# Dionice (legs) nastaju IZMEĐU susjednih točaka, pa će redoslijed točaka
+# odrediti i imena dionica u analizi (npr. Šibenik->Zadar, Zadar->Sveti Rok, ...).
+#
+# !!! VAŽNO O KOORDINATAMA !!!
+# Koordinate međutočaka MORAJU ležati TOČNO na autocesti A1, inače Google
+# tretira točku kao "stajanje" i ruta skreće u grad (čvor) -> pogrešni podaci.
+# Najsigurnije: otvori Google Maps, desni klik na samu traku A1 kod čvora,
+# kopiraj lat,lng i zalijepi ovdje. Donje vrijednosti su PROCJENE -> PROVJERI ih.
+# Nakon unosa pokreni `python3 collect.py --validate` i usporedi ukupno
+# trajanje (~3 h / ~10800 s za Šibenik-Zagreb) i zbroj dionica s Google Maps.
+
+timezone: Europe/Zagreb
+
+# BEST_GUESS (preporuka) | PESSIMISTIC | OPTIMISTIC
+traffic_model: BEST_GUESS
+
+# TRAFFIC_AWARE (preporuka, jeftinije) | TRAFFIC_AWARE_OPTIMAL (kao u Maps appu, skuplje)
+routing_preference: TRAFFIC_AWARE
+
+routes:
+  - name: "Šibenik → Zagreb"
+    active: true
+    points:
+      - { label: "Šibenik",   lat: 43.79050, lng: 15.95400 }   # PROVJERI – čvor Šibenik na A1
+      - { label: "Zadar",     lat: 44.12700, lng: 15.34300 }   # PROVJERI – čvor Zadar
+      - { label: "Sveti Rok", lat: 44.27800, lng: 15.66000 }   # PROVJERI – tunel Sv. Rok (jug)
+      - { label: "Gospić",    lat: 44.62000, lng: 15.36500 }   # PROVJERI – čvor Gospić
+      - { label: "Bosiljevo", lat: 45.36500, lng: 15.27500 }   # PROVJERI – čvor Bosiljevo 2 (A1/A6)
+      - { label: "Karlovac",  lat: 45.49000, lng: 15.54500 }   # PROVJERI – čvor Karlovac
+      - { label: "Lučko",     lat: 45.77500, lng: 15.90500 }   # PROVJERI – čvor Lučko
+      - { label: "Zagreb",    lat: 45.80100, lng: 15.97200 }   # PROVJERI – Zagreb (kraj)
+
+  # Suprotni smjer – uključi (active: true) kad budeš htio pratiti i povratak.
+  - name: "Zagreb → Šibenik"
+    active: true 
+    points:
+      - { label: "Zagreb",    lat: 45.80100, lng: 15.97200 }
+      - { label: "Lučko",     lat: 45.77500, lng: 15.90500 }
+      - { label: "Karlovac",  lat: 45.49000, lng: 15.54500 }
+      - { label: "Bosiljevo", lat: 45.36500, lng: 15.27500 }
+      - { label: "Gospić",    lat: 44.62000, lng: 15.36500 }
+      - { label: "Sveti Rok", lat: 44.27800, lng: 15.66000 }
+      - { label: "Zadar",     lat: 44.12700, lng: 15.34300 }
+      - { label: "Šibenik",   lat: 43.79050, lng: 15.95400 }

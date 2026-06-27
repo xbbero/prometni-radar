@@ -1,0 +1,17 @@
+# Tajne / secrets — NIKAD u repo
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Lokalni izlazi / local outputs
+reports/*.png
+*.db
+
+# OS / editor
+.DS_Store
+*.swp
+
+# Arhive
+*.tar.gz
