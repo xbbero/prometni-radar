@@ -1,10 +1,8 @@
 # Raspored prikupljanja (vrijeme = lokalno, Europe/Zagreb zbog TZ u Dockerfileu).
-# Format: min  sat  dan-u-mjesecu  mjesec  dan-u-tjednu  naredba
+# Cilj: svakih 30 min, od 5:30 do 23:00, SVAKI dan. Oba smjera (2 rute).
+# Tri retka da granice budu točno 5:30 i 23:00 (a ne 5:00 / 23:30).
 #
-# */30 6-22 * * *  -> svakih 30 min, od 6 do 22h, SVAKI dan.
-#   Oba smjera (2 rute) x ~34 termina/dan = ~68 poziva/dan = ~2100/mjesec (< 5000 free).
-#
-# Alternative:
-#   */30 * * * *    -> svakih 30 min, 0-24h (~3000/mjesec, i dalje besplatno)
-#   0 7-21 * * 0    -> samo nedjeljom, svaki sat (prvotni minimalni plan)
-*/30 6-22 * * * cd /app && python collect.py
+# Procjena: ~36 termina/dan x 2 smjera x 31 = ~2230 poziva/mjesec (< 5000 free).
+30 5    * * * cd /app && python collect.py
+0,30 6-22 * * * cd /app && python collect.py
+0 23    * * * cd /app && python collect.py

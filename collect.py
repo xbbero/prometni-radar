@@ -96,7 +96,7 @@ def sync_route(con, name, points):
         cur.execute("DELETE FROM route_point WHERE route_id = %s", (route_id,))
         cur.executemany(
             "INSERT INTO route_point(route_id, seq, label, lat, lng) VALUES (%s,%s,%s,%s,%s)",
-            [(route_id, i, p["label"], p["lat"], p["lng"]) for i, p in enumerate(points)],
+            [(route_id, i, p["label"], p.get("lat"), p.get("lng")) for i, p in enumerate(points)],
         )
     con.commit()
     return route_id

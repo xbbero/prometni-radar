@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS route_point (
     route_id BIGINT  NOT NULL REFERENCES route(route_id) ON DELETE CASCADE,
     seq      INTEGER NOT NULL,
     label    TEXT    NOT NULL,
-    lat      DOUBLE PRECISION NOT NULL,
-    lng      DOUBLE PRECISION NOT NULL,
+    lat      DOUBLE PRECISION,
+    lng      DOUBLE PRECISION,
     PRIMARY KEY (route_id, seq)
 );
 
