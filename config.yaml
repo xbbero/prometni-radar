@@ -1,47 +1,41 @@
 # Definicije ruta i parametara prikupljanja.
 #
 # Svaka ruta je UREĐENI niz točaka: origin, međutočke..., destination.
-# Dionice (legs) nastaju IZMEĐU susjednih točaka, pa će redoslijed točaka
-# odrediti i imena dionica u analizi (npr. Šibenik->Zadar, Zadar->Sveti Rok, ...).
-#
-# !!! VAŽNO O KOORDINATAMA !!!
-# Koordinate međutočaka MORAJU ležati TOČNO na autocesti A1, inače Google
-# tretira točku kao "stajanje" i ruta skreće u grad (čvor) -> pogrešni podaci.
-# Najsigurnije: otvori Google Maps, desni klik na samu traku A1 kod čvora,
-# kopiraj lat,lng i zalijepi ovdje. Donje vrijednosti su PROCJENE -> PROVJERI ih.
-# Nakon unosa pokreni `python3 collect.py --validate` i usporedi ukupno
-# trajanje (~3 h / ~10800 s za Šibenik-Zagreb) i zbroj dionica s Google Maps.
+# Dionice (legs) nastaju IZMEĐU susjednih točaka.
+# Koordinate su ručno izvučene iz Google Maps na trasi A1.
 
 timezone: Europe/Zagreb
 
-# BEST_GUESS (preporuka) | PESSIMISTIC | OPTIMISTIC
+# BEST_GUESS (default) | PESSIMISTIC | OPTIMISTIC
+# Napomena: trafficModel se šalje API-ju SAMO uz TRAFFIC_AWARE_OPTIMAL.
 traffic_model: BEST_GUESS
 
-# TRAFFIC_AWARE (preporuka, jeftinije) | TRAFFIC_AWARE_OPTIMAL (kao u Maps appu, skuplje)
+# TRAFFIC_AWARE (Pro tier, besplatno do 5000/mj) | TRAFFIC_AWARE_OPTIMAL (skuplje)
 routing_preference: TRAFFIC_AWARE
 
 routes:
   - name: "Šibenik → Zagreb"
     active: true
     points:
-      - { label: "Šibenik",   lat: 43.79050, lng: 15.95400 }   # PROVJERI – čvor Šibenik na A1
-      - { label: "Zadar",     lat: 44.12700, lng: 15.34300 }   # PROVJERI – čvor Zadar
-      - { label: "Sveti Rok", lat: 44.27800, lng: 15.66000 }   # PROVJERI – tunel Sv. Rok (jug)
-      - { label: "Gospić",    lat: 44.62000, lng: 15.36500 }   # PROVJERI – čvor Gospić
-      - { label: "Bosiljevo", lat: 45.36500, lng: 15.27500 }   # PROVJERI – čvor Bosiljevo 2 (A1/A6)
-      - { label: "Karlovac",  lat: 45.49000, lng: 15.54500 }   # PROVJERI – čvor Karlovac
-      - { label: "Lučko",     lat: 45.77500, lng: 15.90500 }   # PROVJERI – čvor Lučko
-      - { label: "Zagreb",    lat: 45.80100, lng: 15.97200 }   # PROVJERI – Zagreb (kraj)
+      - { label: "Šibenik",   lat: 43.768607, lng: 15.931692 }
+      - { label: "Zadar",     lat: 44.114677, lng: 15.444397 }
+      - { label: "Sveti Rok", lat: 44.255638, lng: 15.649349 }
+      - { label: "Gospić",    lat: 44.573200, lng: 15.426846 }
+      - { label: "Otočac",    lat: 44.891164, lng: 15.192770 }
+      - { label: "Bosiljevo", lat: 45.408128, lng: 15.262525 }
+      - { label: "Karlovac",  lat: 45.515032, lng: 15.549805 }
+      - { label: "Lučko",     lat: 45.749068, lng: 15.884305 }
+      - { label: "Remetinec", lat: 45.779238, lng: 15.952813 }
 
-  # Suprotni smjer – uključi (active: true) kad budeš htio pratiti i povratak.
   - name: "Zagreb → Šibenik"
-    active: true 
+    active: true
     points:
-      - { label: "Zagreb",    lat: 45.80100, lng: 15.97200 }
-      - { label: "Lučko",     lat: 45.77500, lng: 15.90500 }
-      - { label: "Karlovac",  lat: 45.49000, lng: 15.54500 }
-      - { label: "Bosiljevo", lat: 45.36500, lng: 15.27500 }
-      - { label: "Gospić",    lat: 44.62000, lng: 15.36500 }
-      - { label: "Sveti Rok", lat: 44.27800, lng: 15.66000 }
-      - { label: "Zadar",     lat: 44.12700, lng: 15.34300 }
-      - { label: "Šibenik",   lat: 43.79050, lng: 15.95400 }
+      - { label: "Remetinec", lat: 45.779238, lng: 15.952813 }
+      - { label: "Lučko",     lat: 45.749068, lng: 15.884305 }
+      - { label: "Karlovac",  lat: 45.515032, lng: 15.549805 }
+      - { label: "Bosiljevo", lat: 45.408128, lng: 15.262525 }
+      - { label: "Otočac",    lat: 44.891164, lng: 15.192770 }
+      - { label: "Gospić",    lat: 44.573200, lng: 15.426846 }
+      - { label: "Sveti Rok", lat: 44.255638, lng: 15.649349 }
+      - { label: "Zadar",     lat: 44.114677, lng: 15.444397 }
+      - { label: "Šibenik",   lat: 43.768607, lng: 15.931692 }
