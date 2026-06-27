@@ -21,25 +21,11 @@ routes:
   - name: "Šibenik → Zagreb"
     active: true
     points:
-      - { label: "Šibenik",   lat: 43.768607, lng: 15.931692 }
-      - { label: "Zadar",     lat: 44.114677, lng: 15.444397 }
-      - { label: "Sveti Rok", lat: 44.255638, lng: 15.649349 }
-      - { label: "Gospić",    lat: 44.573200, lng: 15.426846 }
-      - { label: "Otočac",    lat: 44.891164, lng: 15.192770 }
-      - { label: "Bosiljevo", lat: 45.408128, lng: 15.262525 }
-      - { label: "Karlovac",  lat: 45.515032, lng: 15.549805 }
-      - { label: "Lučko",     lat: 45.749068, lng: 15.884305 }
-      - { label: "Remetinec", lat: 45.779238, lng: 15.952813 }
+      - { label: "Šibenik", lat: 43.768607, lng: 15.931692 }
+      - { label: "Zagreb",  lat: 45.794907, lng: 15.944004 }   # Trešnjevka
 
   - name: "Zagreb → Šibenik"
     active: true
     points:
-      - { label: "Remetinec", lat: 45.779238, lng: 15.952813 }
-      - { label: "Lučko",     lat: 45.749068, lng: 15.884305 }
-      - { label: "Karlovac",  lat: 45.515032, lng: 15.549805 }
-      - { label: "Bosiljevo", lat: 45.408128, lng: 15.262525 }
-      - { label: "Otočac",    lat: 44.891164, lng: 15.192770 }
-      - { label: "Gospić",    lat: 44.573200, lng: 15.426846 }
-      - { label: "Sveti Rok", lat: 44.255638, lng: 15.649349 }
-      - { label: "Zadar",     lat: 44.114677, lng: 15.444397 }
-      - { label: "Šibenik",   lat: 43.768607, lng: 15.931692 }
+      - { label: "Zagreb",  lat: 45.794907, lng: 15.944004 }   # Trešnjevka
+      - { label: "Šibenik", lat: 43.768607, lng: 15.931692 }
