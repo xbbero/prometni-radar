@@ -21,11 +21,11 @@ routes:
   - name: "Šibenik → Zagreb"
     active: true
     points:
-      - { label: "Šibenik", lat: 43.768607, lng: 15.931692 }
-      - { label: "Zagreb",  lat: 45.794907, lng: 15.944004 }   # Trešnjevka
+      - { label: "Šibenik", address: "Šibenik, Hrvatska" }
+      - { label: "Zagreb",  address: "Trešnjevka, Zagreb, Hrvatska" }
 
   - name: "Zagreb → Šibenik"
     active: true
     points:
-      - { label: "Zagreb",  lat: 45.794907, lng: 15.944004 }   # Trešnjevka
-      - { label: "Šibenik", lat: 43.768607, lng: 15.931692 }
+      - { label: "Zagreb",  address: "Trešnjevka, Zagreb, Hrvatska" }
+      - { label: "Šibenik", address: "Šibenik, Hrvatska" }

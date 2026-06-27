@@ -104,6 +104,9 @@ def sync_route(con, name, points):
 
 def build_body(points, cfg, departure_utc):
     def wp(p):
+        # Točka može biti adresa (geokodira je Google, kao u Maps tražilici) ili lat/lng.
+        if p.get("address"):
+            return {"address": p["address"]}
         return {"location": {"latLng": {"latitude": p["lat"], "longitude": p["lng"]}}}
 
     body = {
