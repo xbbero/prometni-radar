@@ -18,7 +18,7 @@ routing_preference: TRAFFIC_AWARE
 whole_route_only: true
 
 routes:
-  # ── v1: CIJELA RUTA (adrese) — skuplja dalje, ne diramo ─────────────────────
+  # ── v1: CIJELA RUTA (adrese) ────────────────────────────────────────────────
   - name: "Šibenik → Zagreb"
     active: true
     whole_route_only: true
@@ -33,34 +33,31 @@ routes:
       - { label: "Zagreb",  address: "Trešnjevka, Zagreb, Hrvatska" }
       - { label: "Šibenik", address: "Šibenik, Hrvatska" }
 
-  # ── v2 dionice (Šibenik → Zagreb) — TEST: Lučko na traci prema Zagrebu ───────
-  # Ostale točke su još Place ID-evi (rampe) i radit će obilaske; gledamo SAMO
-  # mijenja li Lučko koordinata dionicu Lučko->Zagreb s ~36 km na ~7-8 km.
+  # ── v2: DIONICE — koordinate na glavnoj pruzi, po kolniku ────────────────────
   - name: "Šibenik → Zagreb (dionice)"
     active: true
     whole_route_only: false
     points:
-      - { label: "Šibenik",   place_id: "ChIJRTCczq8vNRMRUZiAaPFigR8" }
-      - { label: "Zadar",     lat: 44.116194, lng: 15.442528 }   # TRAKA prema Zagrebu
-      - { label: "Sveti Rok", lat: 44.255472, lng: 15.649361 }   # TRAKA prema Zagrebu
-      - { label: "Gospić",    lat: 44.574278, lng: 15.427111 }   # TRAKA prema Zagrebu
-      - { label: "Otočac",    place_id: "ChIJ4RSvLAzqY0cRWl0XGzyGCyo" }
-      - { label: "Bosiljevo", lat: 45.408917, lng: 15.270444 }   # TRAKA prema Zagrebu
-      - { label: "Karlovac",  lat: 45.515972, lng: 15.552056 }   # TRAKA prema Zagrebu
-      - { label: "Lučko",     lat: 45.749972, lng: 15.885361 }   # TRAKA prema Zagrebu
-      - { label: "Zagreb",    place_id: "ChIJOwVxSqrVZUcREOmyVeVIGF0" }
+      - { label: "Šibenik", place_id: "ChIJRTCczq8vNRMRUZiAaPFigR8" }
+      - { label: "Zadar", lat: 44.115889, lng: 15.442944 }
+      - { label: "Sveti Rok", lat: 44.255472, lng: 15.649361 }
+      - { label: "Gospić", lat: 44.574278, lng: 15.427111 }
+      - { label: "Otočac", lat: 44.892722, lng: 15.191250 }
+      - { label: "Bosiljevo", lat: 45.408917, lng: 15.270444 }
+      - { label: "Karlovac", lat: 45.515972, lng: 15.552056 }
+      - { label: "Lučko", lat: 45.749972, lng: 15.885361 }
+      - { label: "Zagreb", place_id: "ChIJOwVxSqrVZUcREOmyVeVIGF0" }
 
-  # ── v2 obrnuti smjer — UGAŠEN dok ne posložimo točke ────────────────────────
   - name: "Zagreb → Šibenik (dionice)"
-    active: false
+    active: true
     whole_route_only: false
     points:
-      - { label: "Zagreb",    place_id: "ChIJOwVxSqrVZUcREOmyVeVIGF0" }
-      - { label: "Lučko",     lat: 45.748389, lng: 15.883472 }   # TRAKA prema Šibeniku
-      - { label: "Karlovac",  place_id: "ChIJO0-vWqc-ZEcRo_lMGPhQBhY" }
-      - { label: "Bosiljevo", place_id: "ChIJf7XlIQBvZEcR-suxe_X4IRE" }
-      - { label: "Otočac",    place_id: "ChIJ4RSvLAzqY0cRWl0XGzyGCyo" }
-      - { label: "Gospić",    place_id: "ChIJe73jfj5_YUcRCFrgeqXNlgI" }
-      - { label: "Sveti Rok", place_id: "ChIJ9-toXOC-YUcRKHIuAQF_m1w" }
-      - { label: "Zadar",     place_id: "ChIJU21P2YzoYUcRXrgZ-f04gIE" }
-      - { label: "Šibenik",   place_id: "ChIJRTCczq8vNRMRUZiAaPFigR8" }
+      - { label: "Zagreb", place_id: "ChIJOwVxSqrVZUcREOmyVeVIGF0" }
+      - { label: "Lučko", lat: 45.748389, lng: 15.883472 }
+      - { label: "Karlovac", lat: 45.513556, lng: 15.545194 }
+      - { label: "Bosiljevo", lat: 45.408111, lng: 15.255861 }
+      - { label: "Otočac", lat: 44.890611, lng: 15.193167 }
+      - { label: "Gospić", lat: 44.572750, lng: 15.426722 }
+      - { label: "Sveti Rok", lat: 44.255806, lng: 15.649389 }
+      - { label: "Zadar", lat: 44.114028, lng: 15.445222 }
+      - { label: "Šibenik", place_id: "ChIJRTCczq8vNRMRUZiAaPFigR8" }
