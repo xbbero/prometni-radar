@@ -23,15 +23,15 @@ routes:
     active: true
     whole_route_only: true
     points:
-      - { label: "Šibenik", address: "Šibenik, Hrvatska" }
-      - { label: "Zagreb",  address: "Trešnjevka, Zagreb, Hrvatska" }
+      - { label: "Šibenik", place_id: "ChIJRTCczq8vNRMRUZiAaPFigR8" }
+      - { label: "Zagreb",  place_id: "ChIJOwVxSqrVZUcREOmyVeVIGF0" }
 
   - name: "Zagreb → Šibenik"
     active: true
     whole_route_only: true
     points:
-      - { label: "Zagreb",  address: "Trešnjevka, Zagreb, Hrvatska" }
-      - { label: "Šibenik", address: "Šibenik, Hrvatska" }
+      - { label: "Zagreb",  place_id: "ChIJOwVxSqrVZUcREOmyVeVIGF0" }
+      - { label: "Šibenik", place_id: "ChIJRTCczq8vNRMRUZiAaPFigR8" }
 
   # ── v2: DIONICE — koordinate na glavnoj pruzi, po kolniku ────────────────────
   - name: "Šibenik → Zagreb (dionice)"
