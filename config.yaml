@@ -41,9 +41,9 @@ routes:
     whole_route_only: false
     points:
       - { label: "Šibenik",   place_id: "ChIJRTCczq8vNRMRUZiAaPFigR8" }
-      - { label: "Zadar",     place_id: "ChIJU21P2YzoYUcRXrgZ-f04gIE" }
-      - { label: "Sveti Rok", place_id: "ChIJ9-toXOC-YUcRKHIuAQF_m1w" }
-      - { label: "Gospić",    place_id: "ChIJe73jfj5_YUcRCFrgeqXNlgI" }
+      - { label: "Zadar",     lat: 44.116194, lng: 15.442528 }   # TRAKA prema Zagrebu
+      - { label: "Sveti Rok", lat: 44.255472, lng: 15.649361 }   # TRAKA prema Zagrebu
+      - { label: "Gospić",    lat: 44.574278, lng: 15.427111 }   # TRAKA prema Zagrebu
       - { label: "Otočac",    place_id: "ChIJ4RSvLAzqY0cRWl0XGzyGCyo" }
       - { label: "Bosiljevo", lat: 45.408917, lng: 15.270444 }   # TRAKA prema Zagrebu
       - { label: "Karlovac",  lat: 45.515972, lng: 15.552056 }   # TRAKA prema Zagrebu
