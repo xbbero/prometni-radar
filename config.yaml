@@ -18,14 +18,46 @@ routing_preference: TRAFFIC_AWARE
 whole_route_only: true
 
 routes:
+  # ── v1: CIJELA RUTA (adrese, pouzdano, bez obilazaka) ───────────────────────
   - name: "Šibenik → Zagreb"
     active: true
+    whole_route_only: true
     points:
       - { label: "Šibenik", address: "Šibenik, Hrvatska" }
       - { label: "Zagreb",  address: "Trešnjevka, Zagreb, Hrvatska" }
 
   - name: "Zagreb → Šibenik"
     active: true
+    whole_route_only: true
     points:
       - { label: "Zagreb",  address: "Trešnjevka, Zagreb, Hrvatska" }
       - { label: "Šibenik", address: "Šibenik, Hrvatska" }
+
+  # ── v2: DIONICE (Place ID-evi čvorova/naplata na A1) ────────────────────────
+  - name: "Šibenik → Zagreb (dionice)"
+    active: true
+    whole_route_only: false
+    points:
+      - { label: "Šibenik",   place_id: "ChIJRTCczq8vNRMRUZiAaPFigR8" }
+      - { label: "Zadar",     place_id: "ChIJU21P2YzoYUcRXrgZ-f04gIE" }
+      - { label: "Sveti Rok", place_id: "ChIJ9-toXOC-YUcRKHIuAQF_m1w" }
+      - { label: "Gospić",    place_id: "ChIJe73jfj5_YUcRCFrgeqXNlgI" }
+      - { label: "Otočac",    place_id: "ChIJ4RSvLAzqY0cRWl0XGzyGCyo" }
+      - { label: "Bosiljevo", place_id: "ChIJf7XlIQBvZEcR-suxe_X4IRE" }
+      - { label: "Karlovac",  place_id: "ChIJO0-vWqc-ZEcRo_lMGPhQBhY" }
+      - { label: "Lučko",     place_id: "ChIJnS87ZnjTZUcRJEm2dIxDsLY" }
+      - { label: "Zagreb",    place_id: "ChIJOwVxSqrVZUcREOmyVeVIGF0" }
+
+  - name: "Zagreb → Šibenik (dionice)"
+    active: true
+    whole_route_only: false
+    points:
+      - { label: "Zagreb",    place_id: "ChIJOwVxSqrVZUcREOmyVeVIGF0" }
+      - { label: "Lučko",     place_id: "ChIJnS87ZnjTZUcRJEm2dIxDsLY" }
+      - { label: "Karlovac",  place_id: "ChIJO0-vWqc-ZEcRo_lMGPhQBhY" }
+      - { label: "Bosiljevo", place_id: "ChIJf7XlIQBvZEcR-suxe_X4IRE" }
+      - { label: "Otočac",    place_id: "ChIJ4RSvLAzqY0cRWl0XGzyGCyo" }
+      - { label: "Gospić",    place_id: "ChIJe73jfj5_YUcRCFrgeqXNlgI" }
+      - { label: "Sveti Rok", place_id: "ChIJ9-toXOC-YUcRKHIuAQF_m1w" }
+      - { label: "Zadar",     place_id: "ChIJU21P2YzoYUcRXrgZ-f04gIE" }
+      - { label: "Šibenik",   place_id: "ChIJRTCczq8vNRMRUZiAaPFigR8" }

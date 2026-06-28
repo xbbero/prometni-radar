@@ -102,9 +102,11 @@ def sync_route(con, name, points):
     return route_id
 
 
-def build_body(points, cfg, departure_utc):
+def build_body(points, cfg, departure_utc, whole_route_only=True):
     def wp(p):
-        # Točka može biti adresa (geokodira je Google, kao u Maps tražilici) ili lat/lng.
+        # Točka može biti Place ID, adresa (geokodira je Google) ili lat/lng.
+        if p.get("place_id"):
+            return {"placeId": p["place_id"]}
         if p.get("address"):
             return {"address": p["address"]}
         return {"location": {"latLng": {"latitude": p["lat"], "longitude": p["lng"]}}}
@@ -119,10 +121,9 @@ def build_body(points, cfg, departure_utc):
     # trafficModel je dozvoljen samo uz TRAFFIC_AWARE_OPTIMAL
     if cfg["routing_preference"] == "TRAFFIC_AWARE_OPTIMAL":
         body["trafficModel"] = cfg["traffic_model"]
-    # whole_route_only (default): NE šalji međutočke -> Google sam nađe najbržu
-    # rutu (A1), bez rizika da neka točka skrene rutu na krivi kolnik. Vraća
-    # jednu dionicu = cijela ruta. (false = v2: međutočke kao stajališta -> dionice)
-    if not cfg.get("whole_route_only", True):
+    # whole_route_only=True (v1): NE šalji međutočke -> jedna dionica (cijela ruta).
+    # False (v2): međutočke kao stajališta -> API vraća dionicu po segmentu (legs).
+    if not whole_route_only:
         intermediates = points[1:-1]
         if intermediates:
             body["intermediates"] = [wp(p) for p in intermediates]
@@ -251,7 +252,9 @@ def run(validate=False):
 
     for route in active:
         points = route["points"]
-        body = build_body(points, cfg, departure_str)
+        whole_route_only = route.get("whole_route_only",
+                                    cfg.get("whole_route_only", True))
+        body = build_body(points, cfg, departure_str, whole_route_only)
         payload = call_api(body, api_key)
         summary, legs = parse_response(payload, points)
 
