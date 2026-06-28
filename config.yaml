@@ -45,8 +45,8 @@ routes:
       - { label: "Sveti Rok", place_id: "ChIJ9-toXOC-YUcRKHIuAQF_m1w" }
       - { label: "Gospić",    place_id: "ChIJe73jfj5_YUcRCFrgeqXNlgI" }
       - { label: "Otočac",    place_id: "ChIJ4RSvLAzqY0cRWl0XGzyGCyo" }
-      - { label: "Bosiljevo", place_id: "ChIJf7XlIQBvZEcR-suxe_X4IRE" }
-      - { label: "Karlovac",  place_id: "ChIJO0-vWqc-ZEcRo_lMGPhQBhY" }
+      - { label: "Bosiljevo", lat: 45.408917, lng: 15.270444 }   # TRAKA prema Zagrebu
+      - { label: "Karlovac",  lat: 45.515972, lng: 15.552056 }   # TRAKA prema Zagrebu
       - { label: "Lučko",     lat: 45.749972, lng: 15.885361 }   # TRAKA prema Zagrebu
       - { label: "Zagreb",    place_id: "ChIJOwVxSqrVZUcREOmyVeVIGF0" }
 
